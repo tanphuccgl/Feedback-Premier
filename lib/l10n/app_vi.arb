@@ -1,0 +1,20 @@
+{
+    "titleReview": "Quý khách vui lòng đánh giá mức độ hài lòng về giao dịch",
+    "labelveryUnHappy": "Rất không hài lòng",
+    "labelUnHappy": "Không hài lòng",
+    "labelNormal": "Bình thường",
+    "labelHappy": "Hài lòng",
+    "labelveryHappy": "Rất hài lòng",
+    "labelName":"Tên",
+    "labelPhone": "Số Điện Thoại",
+"labelRoom":"Phòng",
+"selectTime":"Chọn giờ",
+"selectDate":"Chọn ngày",
+"selectedTime":"Giờ",
+"selectedDate":"Ngày",
+"textcontinue":"Tiếp tục",
+"succeess": "Thành công","failure": "Thất bại","descripSuccess":"Cảm ơn bạn đã đánh giá","descripFailure":
+"Đánh giá thất bại","descripMaintenance":"Hệ thống đang bảo trì","maintenance":"Bảo trì"
+
+
+}

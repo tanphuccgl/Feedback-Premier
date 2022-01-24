@@ -1,0 +1,18 @@
+{
+    "titleReview": "Please rate the satisfaction level of the transaction",
+    "labelveryUnHappy": "Very Unhappy",
+    "labelUnHappy": "UnHappy",
+    "labelNormal": "Normal",
+    "labelHappy": "Happy",
+    "labelveryHappy": "Very happy",
+    "labelName":"Name",
+    "labelPhone": "Phone",
+"labelRoom":"Room",
+"selectTime":"Select Time",
+"selectDate":"Select Date",
+"selectedTime":"Selected Time",
+"selectedDate":"Selected Date",
+"textcontinue":"Continue",
+"succeess": "succeess","failure": "failure","descripSuccess":"Thank you for rating","descripFailure":
+"Failed evaluation","descripMaintenance":"The system is maintenance","maintenance":"maintenance"
+}
