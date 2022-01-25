@@ -12,7 +12,7 @@ Widget input(
     required Function(String) onChanged}) {
   Size size = MediaQuery.of(context!).size;
   return SizedBox(
-    height: size.width / 15,
+    height: size.width / 10,
     child: Center(
       child: TextField(
         controller: controller,
@@ -26,13 +26,13 @@ Widget input(
             fontWeight: FontWeight.w400,
             fontSize: size.width / 50),
         decoration: InputDecoration(
-            enabledBorder: UnderlineInputBorder(
+            enabledBorder: const UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.grey),
             ),
-            focusedBorder: UnderlineInputBorder(
+            focusedBorder: const UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.white, width: 2),
             ),
-            focusedErrorBorder: UnderlineInputBorder(
+            focusedErrorBorder: const UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.white, width: 5),
             ),
             border: const UnderlineInputBorder(

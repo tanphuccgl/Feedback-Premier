@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 import 'package:review_premier_pearl/core/utils/my_assets.dart';
 import 'package:review_premier_pearl/core/utils/my_dialogs.dart';
 import 'package:review_premier_pearl/feature/review_offline/presentation/managers/post_review_offline_bloc.dart';
 import 'package:review_premier_pearl/feature/review_offline/presentation/widgets/background.dart';
 import 'package:review_premier_pearl/feature/review_offline/presentation/widgets/status_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:review_premier_pearl/feature/review_offline/provider/locale_provider.dart';
 
 class ReviewPage extends StatelessWidget {
   final String? fullName;
@@ -25,12 +27,36 @@ class ReviewPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final size = MediaQuery.of(context).size;
+    final provider = Provider.of<LocaleProvider>(context, listen: false);
+    final locale = provider.locale;
     return Scaffold(
+      bottomNavigationBar: SizedBox(
+        width: size.width,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            IconButton(
+              onPressed: () {
+                provider.setLocale(const Locale('vi'));
+              },
+              icon: Image.asset(MyAssets.flagVN),
+              iconSize: 30,
+            ),
+            IconButton(
+              onPressed: () {
+                provider.setLocale(const Locale('en'));
+              },
+              icon: Image.asset(MyAssets.flagUS),
+              iconSize: 30,
+            ),
+          ],
+        ),
+      ),
       body: SafeArea(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Background(
               onBoarding: onBoarding ?? false,
@@ -42,6 +68,7 @@ class ReviewPage extends StatelessWidget {
                 child: SizedBox(
                   width: size.width,
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       StatusWidget(
                         assetIcon: MyAssets.veryunhappyIcon,
@@ -144,8 +171,12 @@ class ReviewPage extends StatelessWidget {
         successDialog(
             context: context,
             function: () {
-              Navigator.pop(context);
-              Navigator.pop(context);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ReviewPage(
+                            onBoarding: true,
+                          )));
             },
             description: AppLocalizations.of(context)!.descripSuccess);
       },

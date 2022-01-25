@@ -16,104 +16,76 @@ class Background extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     String title = AppLocalizations.of(context)!.titleReview;
     final provider = Provider.of<LocaleProvider>(context, listen: false);
-    final locale = provider.locale ;
-    return Padding(
-      padding: const EdgeInsets.only(top: 20),
-      child: Column(
-        children: [
-          Stack(
-            alignment: Alignment.centerLeft,
-            children: [
-              Container(
-                width: size.width,
-                height: size.width / 12,
-                color: midnightColor,
-              ),
-              onBoarding == true
-                  ? SizedBox.shrink()
-                  : Align(
-                      alignment: Alignment.centerLeft,
-                      child: IconButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        icon: Icon(Icons.arrow_back_ios),
-                        color: Colors.white,
-                      ),
-                    ),
-              Align(
-                  alignment: Alignment.center,
-                  child: Image.asset(
-                    MyAssets.logo,
-                    fit: BoxFit.fill,
-                    width: 40,
-                  )),
-              onBoarding == false
-                  ? Align(
-                      alignment: Alignment.centerRight,
-                      child: IconButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ReviewPage(
-                                        onBoarding: true,
-                                      )));
-                        },
-                        icon: Icon(Icons.home),
-                        color: Colors.white,
-                      ),
-                    )
-                  : Align(
-                      alignment: Alignment.centerRight,
-                      child: IconButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => FormReviewPage()));
-                        },
-                        icon: Icon(Icons.corporate_fare_outlined),
-                        color: Colors.white,
-                      ),
-                    ),
-            ],
-          ),
-          SizedBox(
-            width: size.width,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                IconButton(
-                  onPressed: () {
-                    provider.setLocale(const Locale('vi'));
-                  },
-                  icon: Image.asset(MyAssets.flagVN),
-                  iconSize: 30,
-                ),
-                IconButton(
-                  onPressed: () {
-                    provider.setLocale(const Locale('en'));
-                  },
-                  icon: Image.asset(MyAssets.flagUS),
-                  iconSize: 30,
-                ),
-              ],
+    final locale = provider.locale;
+    return Column(
+      children: [
+        Stack(
+          alignment: Alignment.centerLeft,
+          children: [
+            Container(
+              width: size.width,
+              height: size.width / 12,
+              color: midnightColor,
             ),
+            onBoarding == true
+                ? SizedBox.shrink()
+                : Align(
+                    alignment: Alignment.centerLeft,
+                    child: IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: Icon(Icons.arrow_back_ios),
+                      color: Colors.white,
+                    ),
+                  ),
+            Align(
+                alignment: Alignment.center,
+                child: Image.asset(
+                  MyAssets.logo,
+                  fit: BoxFit.fill,
+                  width: 40,
+                )),
+            onBoarding == false
+                ? Align(
+                    alignment: Alignment.centerRight,
+                    child: IconButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ReviewPage(
+                                      onBoarding: true,
+                                    )));
+                      },
+                      icon: Icon(Icons.home),
+                      color: Colors.white,
+                    ),
+                  )
+                : Align(
+                    alignment: Alignment.centerRight,
+                    child: IconButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => FormReviewPage()));
+                      },
+                      icon: Icon(Icons.corporate_fare_outlined),
+                      color: Colors.white,
+                    ),
+                  ),
+          ],
+        ),
+        Padding(
+          padding: EdgeInsets.only(top: 20),
+          child: Text(
+            title,
+            style: TextStyle(
+                color: Colors.black, fontWeight: FontWeight.bold, fontSize: 23),
           ),
-          Padding(
-            padding: EdgeInsets.only(top: 10),
-            child: Text(
-              title,
-              style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 23),
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
