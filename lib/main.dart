@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (_) => sl<PostReviewOfflineBloc>()),
           ],
           child: MaterialApp(
-            title: 'Flutter Demo',
+            title: 'Feedback Premier',
             locale: Provider.of<LocaleProvider>(context).locale,
             supportedLocales: L10n.all,
             localizationsDelegates: const [
