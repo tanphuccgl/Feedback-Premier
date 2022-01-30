@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:review_premier_pearl/core/utils/my_assets.dart';
 import 'package:review_premier_pearl/core/utils/my_colors.dart';
+import 'package:review_premier_pearl/core/utils/page_routers.dart';
 import 'package:review_premier_pearl/feature/review_offline/presentation/pages/form_review_page.dart';
 import 'package:review_premier_pearl/feature/review_offline/presentation/pages/review_page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -47,12 +48,9 @@ class Background extends StatelessWidget {
                     alignment: Alignment.centerRight,
                     child: IconButton(
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const ReviewPage(
-                                      onBoarding: true,
-                                    )));
+                        Navigator.pushNamed(
+                            context,PageRoutes.reviewPage
+                           );
                       },
                       icon: const Icon(Icons.home),
                       color: Colors.white,

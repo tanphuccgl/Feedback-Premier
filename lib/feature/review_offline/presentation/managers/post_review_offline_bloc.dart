@@ -1,23 +1,31 @@
+import 'dart:async';
+
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:review_premier_pearl/core/config/constants.dart';
 import 'package:review_premier_pearl/core/error/failures.dart';
+import 'package:review_premier_pearl/core/utils/my_dialogs.dart';
+import 'package:review_premier_pearl/core/utils/page_routers.dart';
 import 'package:review_premier_pearl/feature/review_offline/domain/usecases/post_review_offline.dart';
+import 'package:review_premier_pearl/feature/review_offline/presentation/pages/review_page.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:review_premier_pearl/feature/review_offline/presentation/pages/thank_you_page.dart';
+
 part 'post_review_offline_state.dart';
 part 'post_review_offline_event.dart';
 
 class PostReviewOfflineBloc
     extends Bloc<PostReviewOfflineEvent, PostReviewOfflineState> {
-   final PostReviewOffline? postReviewOffline;
+  final PostReviewOffline? postReviewOffline;
   PostReviewOfflineBloc( {this.postReviewOffline}) : super(Empty());
+
 
   @override
   Stream<PostReviewOfflineState> mapEventToState(
       PostReviewOfflineEvent event) async* {
     if (event is PostReviewOfflineE) {
-    
       final result = await postReviewOffline!(PostReviewOfflineParams(
           checkIn: event.checkIn,
           failure: event.failure,
@@ -46,5 +54,52 @@ class PostReviewOfflineBloc
       default:
         return "Unexpected error";
     }
+  }
+
+  static void postReview(BuildContext context,
+      {required String checkIn,
+      required String fullName,
+      required String phoneNumber,
+      required String review,
+      required String room}) {
+       
+    BlocProvider.of<PostReviewOfflineBloc>(context).add(PostReviewOfflineE(
+      checkIn: checkIn,
+      failure: () {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const ThankYouPage()));
+        Timer(const Duration(seconds: 10), () {
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(
+                  builder: (context) => ReviewPage(
+                        onBoarding: true,
+                      )),
+              (Route<dynamic> route) => false);
+        });
+      },
+      fullName: fullName,
+      phoneNumber: phoneNumber,
+      review: review,
+      room: room,
+      success: () {
+        Navigator.pushNamed(context, PageRoutes.thankYouPage);
+        
+      
+      
+
+        // if (ReviewPage.routeName
+        //        ==
+        //     "/ReviewPage") {
+        //   print("afdsfad");
+        // }
+      },
+      timeout: () {
+        maintenanceDialog(
+            context: context,
+            function: () {
+              Navigator.pop(context);
+            });
+      },
+    ));
   }
 }

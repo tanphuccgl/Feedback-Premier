@@ -47,10 +47,12 @@ class _FormReviewPageState extends State<FormReviewPage> {
     fullName = "";
     phoneNumber = "";
     room = "";
+ 
   }
 
   @override
   Widget build(BuildContext context) {
+
     final size = MediaQuery.of(context).size;
     final provider = Provider.of<LocaleProvider>(context, listen: false);
     return Scaffold(

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -22,7 +23,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await di.init();
   HttpOverrides.global = MyHttpOverrides();
-
+  
   await SystemChrome.setPreferredOrientations(
       [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
 
@@ -55,13 +56,13 @@ class MyApp extends StatelessWidget {
               primarySwatch: Colors.blue,
             ),
             routes: {
-              PageRoutes.reviewPage: (context) => const ReviewPage(),
+              PageRoutes.reviewPage: (context) => const ReviewPage(onBoarding: true,),
               PageRoutes.formReviewPage: (context) => const FormReviewPage(),
               PageRoutes.thankYouPage: (context) => const ThankYouPage(),
             },
             debugShowCheckedModeBanner: false,
-            home: const ThankYouPage(
-                // onBoarding: true,
+            home: const ReviewPage(
+                 onBoarding: true,
                 ),
           ),
         );

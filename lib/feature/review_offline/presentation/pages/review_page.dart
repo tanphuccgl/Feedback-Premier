@@ -1,13 +1,18 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:review_premier_pearl/core/utils/my_assets.dart';
 import 'package:review_premier_pearl/core/utils/my_dialogs.dart';
 import 'package:review_premier_pearl/feature/review_offline/presentation/managers/post_review_offline_bloc.dart';
+import 'package:review_premier_pearl/feature/review_offline/presentation/pages/thank_you_page.dart';
 import 'package:review_premier_pearl/feature/review_offline/presentation/widgets/background.dart';
 import 'package:review_premier_pearl/feature/review_offline/presentation/widgets/status_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:review_premier_pearl/feature/review_offline/provider/locale_provider.dart';
+
+import '../../../../main.dart';
 
 class ReviewPage extends StatelessWidget {
   final String? fullName;
@@ -29,6 +34,13 @@ class ReviewPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final provider = Provider.of<LocaleProvider>(context, listen: false);
+    
+    print(ModalRoute.of(context)!.settings.name);
+    if (ModalRoute.of(context)!.settings.name == "/ReviewPage" &&
+        timer.isActive == true) {
+      print("hehe");
+      timer.cancel();
+    }
     return Scaffold(
       bottomNavigationBar: SizedBox(
         width: size.width,
@@ -75,7 +87,7 @@ class ReviewPage extends StatelessWidget {
                         onPressed: () {
                           onBoarding == true
                               ? null
-                              : _postReviewOffline(context,
+                              : PostReviewOfflineBloc.postReview(context,
                                   fullName: fullName!,
                                   checkIn: checkIn!,
                                   phoneNumber: phoneNumber!,
@@ -89,7 +101,7 @@ class ReviewPage extends StatelessWidget {
                           onPressed: () {
                             onBoarding == true
                                 ? null
-                                : _postReviewOffline(context,
+                                : PostReviewOfflineBloc.postReview(context,
                                     fullName: fullName!,
                                     checkIn: checkIn!,
                                     phoneNumber: phoneNumber!,
@@ -102,7 +114,7 @@ class ReviewPage extends StatelessWidget {
                           onPressed: () {
                             onBoarding == true
                                 ? null
-                                : _postReviewOffline(context,
+                                : PostReviewOfflineBloc.postReview(context,
                                     fullName: fullName!,
                                     checkIn: checkIn!,
                                     phoneNumber: phoneNumber!,
@@ -115,7 +127,7 @@ class ReviewPage extends StatelessWidget {
                           onPressed: () {
                             onBoarding == true
                                 ? null
-                                : _postReviewOffline(context,
+                                : PostReviewOfflineBloc.postReview(context,
                                     fullName: fullName!,
                                     checkIn: checkIn!,
                                     phoneNumber: phoneNumber!,
@@ -128,7 +140,7 @@ class ReviewPage extends StatelessWidget {
                           onPressed: () {
                             onBoarding == true
                                 ? null
-                                : _postReviewOffline(context,
+                                : PostReviewOfflineBloc.postReview(context,
                                     fullName: fullName!,
                                     checkIn: checkIn!,
                                     phoneNumber: phoneNumber!,
@@ -144,48 +156,5 @@ class ReviewPage extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  void _postReviewOffline(BuildContext context,
-      {required String checkIn,
-      required String fullName,
-      required String phoneNumber,
-      required String review,
-      required String room}) {
-    BlocProvider.of<PostReviewOfflineBloc>(context).add(PostReviewOfflineE(
-      checkIn: checkIn,
-      failure: () {
-        errorDialog(
-            context: context,
-            function: () {
-              Navigator.pop(context);
-            },
-            description: AppLocalizations.of(context)!.descripFailure);
-      },
-      fullName: fullName,
-      phoneNumber: phoneNumber,
-      review: review,
-      room: room,
-      success: () {
-        successDialog(
-            context: context,
-            function: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const ReviewPage(
-                            onBoarding: true,
-                          )));
-            },
-            description: AppLocalizations.of(context)!.descripSuccess);
-      },
-      timeout: () {
-        maintenanceDialog(
-            context: context,
-            function: () {
-              Navigator.pop(context);
-            });
-      },
-    ));
   }
 }
