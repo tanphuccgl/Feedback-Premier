@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:review_premier_pearl/core/utils/my_colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -24,8 +23,8 @@ class AlertDialog1 extends StatelessWidget {
 
     return Dialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        child: Stack(
-          overflow: Overflow.visible,
+        child: Stack(clipBehavior: Clip.none,
+       
           alignment: Alignment.topCenter,
           children: [
             SizedBox(
@@ -148,26 +147,5 @@ void maintenanceDialog({Function()? function, BuildContext? context}) {
       });
 }
 
-void loadingDialog({BuildContext? context}) {
-  var alert = Dialog(
-      backgroundColor: Colors.transparent,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      child: Stack(
-        overflow: Overflow.visible,
-        alignment: Alignment.topCenter,
-        children: const [
-          SizedBox(
-              height: 230,
-              child: Padding(
-                  padding: EdgeInsets.fromLTRB(10, 70, 10, 10),
-                  child: SpinKitCircle(
-                    color: Colors.lightBlueAccent,
-                  ))),
-        ],
-      ));
-  showDialog(
-      context: context!,
-      builder: (context) {
-        return alert;
-      });
-}
+
+

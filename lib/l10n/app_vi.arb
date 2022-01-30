@@ -1,20 +1,23 @@
 {
-    "titleReview": "Quý khách vui lòng đánh giá mức độ hài lòng về giao dịch",
-    "labelveryUnHappy": "Rất không hài lòng",
-    "labelUnHappy": "Không hài lòng",
-    "labelNormal": "Bình thường",
-    "labelHappy": "Hài lòng",
-    "labelveryHappy": "Rất hài lòng",
-    "labelName":"Tên",
-    "labelPhone": "Số Điện Thoại",
-"labelRoom":"Phòng",
-"selectTime":"Chọn giờ",
-"selectDate":"Chọn ngày",
-"selectedTime":"Giờ",
-"selectedDate":"Ngày",
-"textcontinue":"Tiếp tục",
-"succeess": "Thành công","failure": "Thất bại","descripSuccess":"Cảm ơn bạn đã đánh giá","descripFailure":
-"Đánh giá thất bại","descripMaintenance":"Hệ thống đang bảo trì","maintenance":"Bảo trì"
-
-
+  "titleReview": "Mời quý khách đánh giá chất lượng dịch vụ của khách sạn",
+  "labelveryUnHappy": "Rất không hài lòng",
+  "labelUnHappy": "Không hài lòng",
+  "labelNormal": "Bình thường",
+  "labelHappy": "Hài lòng",
+  "labelveryHappy": "Rất hài lòng",
+  "labelName": "Tên",
+  "labelPhone": "Số Điện Thoại",
+  "labelRoom": "Phòng",
+  "selectTime": "Chọn giờ",
+  "selectDate": "Chọn ngày",
+  "selectedTime": "Giờ",
+  "selectedDate": "Ngày",
+  "textcontinue": "Tiếp tục",
+  "succeess": "Thành công",
+  "failure": "Thất bại",
+  "descripSuccess": "Cảm ơn bạn đã đánh giá",
+  "descripFailure": "Đánh giá thất bại",
+  "descripMaintenance": "Hệ thống đang bảo trì",
+  "maintenance": "Bảo trì",
+  "contentThankYou": "Xin chân thành cảm ơn đánh giá của Quý khách. Mọi ý kiến đánh giá sẽ giúp nâng cao chất lượng dịch vụ của khách sạn.\nXin cảm ơn và hẹn gặp lại Quý khách."
 }

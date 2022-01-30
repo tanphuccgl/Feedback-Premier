@@ -16,6 +16,8 @@ import 'feature/review_offline/presentation/managers/post_review_offline_bloc.da
 import 'feature/review_offline/presentation/pages/review_page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import 'feature/review_offline/presentation/pages/thank_you_page.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await di.init();
@@ -35,7 +37,6 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => LocaleProvider(),
       builder: (context, child) {
-        final provider = Provider.of<LocaleProvider>(context);
         return MultiProvider(
           providers: [
             BlocProvider(create: (_) => sl<PostReviewOfflineBloc>()),
@@ -56,11 +57,12 @@ class MyApp extends StatelessWidget {
             routes: {
               PageRoutes.reviewPage: (context) => const ReviewPage(),
               PageRoutes.formReviewPage: (context) => const FormReviewPage(),
+              PageRoutes.thankYouPage: (context) => const ThankYouPage(),
             },
             debugShowCheckedModeBanner: false,
-            home: const ReviewPage(
-              onBoarding: true,
-            ),
+            home: const ThankYouPage(
+                // onBoarding: true,
+                ),
           ),
         );
       },

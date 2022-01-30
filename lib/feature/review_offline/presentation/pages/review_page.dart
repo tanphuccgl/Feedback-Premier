@@ -29,7 +29,6 @@ class ReviewPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final provider = Provider.of<LocaleProvider>(context, listen: false);
-    final locale = provider.locale;
     return Scaffold(
       bottomNavigationBar: SizedBox(
         width: size.width,
@@ -174,7 +173,7 @@ class ReviewPage extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => ReviewPage(
+                      builder: (context) => const ReviewPage(
                             onBoarding: true,
                           )));
             },

@@ -7,7 +7,7 @@ import 'package:review_premier_pearl/core/utils/my_colors.dart';
 Widget input(
     {TextEditingController? controller,
     Iterable<String>? autofillHints,
-    BuildContext? context,
+    BuildContext? context,TextInputType? keyboardType=TextInputType.name,
     String? hintText,
     required Function(String) onChanged}) {
   Size size = MediaQuery.of(context!).size;
@@ -19,7 +19,7 @@ Widget input(
         autofillHints: autofillHints,
         maxLines: 1,
         onChanged: onChanged,
-        keyboardType: TextInputType.name,
+        keyboardType: keyboardType,
         style: TextStyle(
             color: Colors.white,
             fontFamily: "Cormorant",

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:review_premier_pearl/core/utils/my_assets.dart';
 import 'package:review_premier_pearl/core/utils/my_buttons.dart';
@@ -18,7 +17,6 @@ class FormReviewPage extends StatefulWidget {
 }
 
 class _FormReviewPageState extends State<FormReviewPage> {
-  TimeOfDay _time = const TimeOfDay(hour: 7, minute: 15);
   DateTime _date = DateTime.now();
   String? fullName;
   late String phoneNumber;
@@ -27,18 +25,6 @@ class _FormReviewPageState extends State<FormReviewPage> {
   final phoneNumberController = TextEditingController();
   final roomController = TextEditingController();
 
-  void _selectTime() async {
-    final TimeOfDay? newTime = await showTimePicker(
-      context: context,
-      initialTime: _time,
-      initialEntryMode: TimePickerEntryMode.input,
-    );
-    if (newTime != null) {
-      setState(() {
-        _time = newTime;
-      });
-    }
-  }
 
   void _selectDate() async {
     final DateTime? newDate = await showDatePicker(
@@ -131,7 +117,7 @@ class _FormReviewPageState extends State<FormReviewPage> {
                       width: size.width / 3,
                       child: input(
                           context: context,
-                          hintText: AppLocalizations.of(context)!.labelPhone,
+                          hintText: AppLocalizations.of(context)!.labelPhone,keyboardType: TextInputType.number,
                           autofillHints: [AutofillHints.telephoneNumber],
                           controller: phoneNumberController,
                           onChanged: (value) {
@@ -188,16 +174,16 @@ class _FormReviewPageState extends State<FormReviewPage> {
                           fontWeight: FontWeight.w700),
                     ),
                     onPressed: () {
-                      DateTime date2;
-                      if (_time.format(context).contains("M")) {
-                        date2 = DateFormat("hh:mm a").parse(_time.format(
-                            context)); // think this will work better for you
-                        //   print(DateFormat("HH:mm").format(date2));
-                      } else {
-                        date2 = DateFormat("hh:mm").parse(_time.format(
-                            context)); // think this will work better for you
-                        //  print(DateFormat("HH:mm").format(date2));
-                      }
+                      // DateTime date2;
+                      // if (_time.format(context).contains("M")) {
+                      //   date2 = DateFormat("hh:mm a").parse(_time.format(
+                      //       context)); // think this will work better for you
+                      //   //   print(DateFormat("HH:mm").format(date2));
+                      // } else {
+                      //   date2 = DateFormat("hh:mm").parse(_time.format(
+                      //       context)); // think this will work better for you
+                      //   //  print(DateFormat("HH:mm").format(date2));
+                      // }
 
                       Navigator.push(
                           context,

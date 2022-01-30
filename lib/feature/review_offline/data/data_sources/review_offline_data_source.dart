@@ -58,11 +58,7 @@ class ReviewOfflineDateSourceImpl implements ReviewOfflineDataSource {
       "checkOut": checkOut,
       "review": review
     });
-       print(fullName);
-    print(phoneNumber);
-    print(room);
-    print(checkIn);
-    print(review);
+
     final response = await client
         .post(Uri.parse("$mainUrl/ReviewOffline/CreateReviewOffline"),
             headers: {
