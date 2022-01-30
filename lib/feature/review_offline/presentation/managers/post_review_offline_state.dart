@@ -1,4 +1,3 @@
-
 part of 'post_review_offline_bloc.dart';
 
 @immutable

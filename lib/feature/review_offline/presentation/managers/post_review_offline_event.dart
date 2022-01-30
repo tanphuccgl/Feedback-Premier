@@ -1,6 +1,4 @@
-
 part of 'post_review_offline_bloc.dart';
-
 
 abstract class PostReviewOfflineEvent extends Equatable {
   @override

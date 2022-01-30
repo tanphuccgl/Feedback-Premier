@@ -19,11 +19,11 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'feature/review_offline/presentation/pages/thank_you_page.dart';
 
+late Timer timer;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await di.init();
   HttpOverrides.global = MyHttpOverrides();
-  
   await SystemChrome.setPreferredOrientations(
       [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
 
@@ -56,14 +56,16 @@ class MyApp extends StatelessWidget {
               primarySwatch: Colors.blue,
             ),
             routes: {
-              PageRoutes.reviewPage: (context) => const ReviewPage(onBoarding: true,),
+              PageRoutes.reviewPage: (context) => const ReviewPage(
+                    isHome: true,
+                  ),
               PageRoutes.formReviewPage: (context) => const FormReviewPage(),
               PageRoutes.thankYouPage: (context) => const ThankYouPage(),
             },
             debugShowCheckedModeBanner: false,
             home: const ReviewPage(
-                 onBoarding: true,
-                ),
+              isHome: true,
+            ),
           ),
         );
       },

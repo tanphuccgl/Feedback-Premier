@@ -9,9 +9,8 @@ import 'package:review_premier_pearl/core/error/failures.dart';
 import 'package:review_premier_pearl/core/utils/my_dialogs.dart';
 import 'package:review_premier_pearl/core/utils/page_routers.dart';
 import 'package:review_premier_pearl/feature/review_offline/domain/usecases/post_review_offline.dart';
-import 'package:review_premier_pearl/feature/review_offline/presentation/pages/review_page.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:review_premier_pearl/feature/review_offline/presentation/pages/thank_you_page.dart';
+
+import '../../../../main.dart';
 
 part 'post_review_offline_state.dart';
 part 'post_review_offline_event.dart';
@@ -19,8 +18,7 @@ part 'post_review_offline_event.dart';
 class PostReviewOfflineBloc
     extends Bloc<PostReviewOfflineEvent, PostReviewOfflineState> {
   final PostReviewOffline? postReviewOffline;
-  PostReviewOfflineBloc( {this.postReviewOffline}) : super(Empty());
-
+  PostReviewOfflineBloc({this.postReviewOffline}) : super(Empty());
 
   @override
   Stream<PostReviewOfflineState> mapEventToState(
@@ -56,26 +54,30 @@ class PostReviewOfflineBloc
     }
   }
 
+  static void stopTimer(BuildContext context, {required String nameRoute}) {
+    if (ModalRoute.of(context)!.settings.name == nameRoute &&
+        timer.isActive == true) {
+      timer.cancel();
+    }
+  }
+
+  static void fromThankYouPageToReviewPage(BuildContext context) {
+    timer = Timer(const Duration(seconds: 10), () {
+      Navigator.of(context).pushNamedAndRemoveUntil(
+          PageRoutes.reviewPage, (Route<dynamic> route) => false);
+    });
+  }
+
   static void postReview(BuildContext context,
       {required String checkIn,
       required String fullName,
       required String phoneNumber,
       required String review,
       required String room}) {
-       
     BlocProvider.of<PostReviewOfflineBloc>(context).add(PostReviewOfflineE(
       checkIn: checkIn,
       failure: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const ThankYouPage()));
-        Timer(const Duration(seconds: 10), () {
-          Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(
-                  builder: (context) => ReviewPage(
-                        onBoarding: true,
-                      )),
-              (Route<dynamic> route) => false);
-        });
+        Navigator.pushNamed(context, PageRoutes.thankYouPage);
       },
       fullName: fullName,
       phoneNumber: phoneNumber,
@@ -83,15 +85,6 @@ class PostReviewOfflineBloc
       room: room,
       success: () {
         Navigator.pushNamed(context, PageRoutes.thankYouPage);
-        
-      
-      
-
-        // if (ReviewPage.routeName
-        //        ==
-        //     "/ReviewPage") {
-        //   print("afdsfad");
-        // }
       },
       timeout: () {
         maintenanceDialog(

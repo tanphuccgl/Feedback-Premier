@@ -23,14 +23,14 @@ class PostReviewOffline implements UseCase<bool, PostReviewOfflineParams> {
 }
 
 class PostReviewOfflineParams extends Equatable {
-   final String fullName;
-   final String phoneNumber;
-   final String checkIn;
-   final String room;
-   final String review;
-   final Function() success;
-   final Function() timeout;
-   final Function() failure;
+  final String fullName;
+  final String phoneNumber;
+  final String checkIn;
+  final String room;
+  final String review;
+  final Function() success;
+  final Function() timeout;
+  final Function() failure;
   const PostReviewOfflineParams({
     required this.checkIn,
     required this.failure,

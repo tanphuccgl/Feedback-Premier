@@ -1,25 +1,16 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
-import 'package:review_premier_pearl/core/utils/my_assets.dart';
-import 'package:review_premier_pearl/core/utils/my_dialogs.dart';
 import 'package:review_premier_pearl/feature/review_offline/presentation/managers/post_review_offline_bloc.dart';
-import 'package:review_premier_pearl/feature/review_offline/presentation/pages/thank_you_page.dart';
-import 'package:review_premier_pearl/feature/review_offline/presentation/widgets/background.dart';
-import 'package:review_premier_pearl/feature/review_offline/presentation/widgets/status_widget.dart';
+import 'package:review_premier_pearl/feature/review_offline/presentation/widgets/header.dart';
+import 'package:review_premier_pearl/feature/review_offline/presentation/widgets/bottom_bar.dart';
+import 'package:review_premier_pearl/feature/review_offline/presentation/widgets/status_list.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:review_premier_pearl/feature/review_offline/provider/locale_provider.dart';
-
-import '../../../../main.dart';
 
 class ReviewPage extends StatelessWidget {
   final String? fullName;
   final String? phoneNumber;
   final String? room;
   final String? checkIn;
-  final bool? onBoarding;
+  final bool isHome;
   static const String routeName = "/ReviewPage";
   const ReviewPage({
     Key? key,
@@ -27,131 +18,40 @@ class ReviewPage extends StatelessWidget {
     this.fullName,
     this.phoneNumber,
     this.room,
-    this.onBoarding,
+    required this.isHome,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final provider = Provider.of<LocaleProvider>(context, listen: false);
-    
-    print(ModalRoute.of(context)!.settings.name);
-    if (ModalRoute.of(context)!.settings.name == "/ReviewPage" &&
-        timer.isActive == true) {
-      print("hehe");
-      timer.cancel();
-    }
+    final title = AppLocalizations.of(context)!.titleReview;
+
+    PostReviewOfflineBloc.stopTimer(context, nameRoute: "/ReviewPage");
     return Scaffold(
-      bottomNavigationBar: SizedBox(
-        width: size.width,
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            IconButton(
-              onPressed: () {
-                provider.setLocale(const Locale('vi'));
-              },
-              icon: Image.asset(MyAssets.flagVN),
-              iconSize: 30,
-            ),
-            IconButton(
-              onPressed: () {
-                provider.setLocale(const Locale('en'));
-              },
-              icon: Image.asset(MyAssets.flagUS),
-              iconSize: 30,
-            ),
-          ],
-        ),
-      ),
+      bottomNavigationBar: const XBottomBar(),
       body: SafeArea(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Background(
-              onBoarding: onBoarding ?? false,
+            XHeader(
+              isHome: isHome,
             ),
-            BlocBuilder<PostReviewOfflineBloc, PostReviewOfflineState>(
-                builder: (context, state) {
-              return Padding(
-                padding: const EdgeInsets.fromLTRB(10, 30, 10, 0),
-                child: SizedBox(
-                  width: size.width,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      StatusWidget(
-                        assetIcon: MyAssets.veryunhappyIcon,
-                        label: AppLocalizations.of(context)!.labelveryUnHappy,
-                        onPressed: () {
-                          onBoarding == true
-                              ? null
-                              : PostReviewOfflineBloc.postReview(context,
-                                  fullName: fullName!,
-                                  checkIn: checkIn!,
-                                  phoneNumber: phoneNumber!,
-                                  review: "veryunhappy",
-                                  room: room!);
-                        },
-                      ),
-                      StatusWidget(
-                          assetIcon: MyAssets.unhappyIcon,
-                          label: AppLocalizations.of(context)!.labelUnHappy,
-                          onPressed: () {
-                            onBoarding == true
-                                ? null
-                                : PostReviewOfflineBloc.postReview(context,
-                                    fullName: fullName!,
-                                    checkIn: checkIn!,
-                                    phoneNumber: phoneNumber!,
-                                    review: "unhappy",
-                                    room: room!);
-                          }),
-                      StatusWidget(
-                          assetIcon: MyAssets.normalIcon,
-                          label: AppLocalizations.of(context)!.labelNormal,
-                          onPressed: () {
-                            onBoarding == true
-                                ? null
-                                : PostReviewOfflineBloc.postReview(context,
-                                    fullName: fullName!,
-                                    checkIn: checkIn!,
-                                    phoneNumber: phoneNumber!,
-                                    review: "normal",
-                                    room: room!);
-                          }),
-                      StatusWidget(
-                          assetIcon: MyAssets.happyIcon,
-                          label: AppLocalizations.of(context)!.labelHappy,
-                          onPressed: () {
-                            onBoarding == true
-                                ? null
-                                : PostReviewOfflineBloc.postReview(context,
-                                    fullName: fullName!,
-                                    checkIn: checkIn!,
-                                    phoneNumber: phoneNumber!,
-                                    review: "happy",
-                                    room: room!);
-                          }),
-                      StatusWidget(
-                          assetIcon: MyAssets.veryhappyIcon,
-                          label: AppLocalizations.of(context)!.labelveryHappy,
-                          onPressed: () {
-                            onBoarding == true
-                                ? null
-                                : PostReviewOfflineBloc.postReview(context,
-                                    fullName: fullName!,
-                                    checkIn: checkIn!,
-                                    phoneNumber: phoneNumber!,
-                                    review: "veryhappy",
-                                    room: room!);
-                          }),
-                    ],
-                  ),
-                ),
-              );
-            }),
+            Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: Text(
+                title,
+                style: const TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 23),
+              ),
+            ),
+            StatusList(
+              isHome: isHome,
+              checkIn: checkIn,
+              fullName: fullName,
+              phoneNumber: phoneNumber,
+              room: room,
+            ),
           ],
         ),
       ),

@@ -70,7 +70,7 @@ class ReviewOfflineDateSourceImpl implements ReviewOfflineDataSource {
       return http.Response("Error", 408);
     });
     log("postReviewOffline " + response.statusCode.toString());
-    if (response.statusCode == 200 || response.statusCode ==201) {
+    if (response.statusCode == 200 || response.statusCode == 201) {
       success();
       return true;
     } else if (response.statusCode == 408) {
